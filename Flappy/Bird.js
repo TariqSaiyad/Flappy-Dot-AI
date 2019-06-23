@@ -5,7 +5,7 @@ function Bird() {
   this.gravity = 0.9;
   this.velocity = 0;
   this.lift = -25;
-
+ // this.brain = new NeuralNetwork(4,4,1);
 
 
   this.show=function() {    
