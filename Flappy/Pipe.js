@@ -7,16 +7,22 @@ function Pipe() {
   this.w = 40;
   this.highlight=false;
   this.speed= 2;
+  
+  this.imgDown = loadImage('assets/pipeDown.png');
+  this.imgUp=loadImage('assets/pipeUp.png');
 
   //This draws the pipe.
   this.show =function() {
-    if (this.highlight) {
-      fill(255, 0, 255);
-    } else {
-      fill(255);
-    }
-    rect(this.x, 0, this.w, this.top);
-    rect(this.x, height-this.bottom, this.w, this.bottom);
+    //if (this.highlight) {
+    //  fill(255, 0, 255);
+    //} else {
+    //  fill(255);
+    //}
+    //rect(this.x, 0, this.w, this.top);
+   // rect(this.x, height-this.bottom, this.w, this.bottom);
+    
+    image(this.imgDown, this.x, 0, this.w, this.top);
+    image(this.imgUp,this.x, height-this.bottom, this.w, this.bottom);
   };
 
 

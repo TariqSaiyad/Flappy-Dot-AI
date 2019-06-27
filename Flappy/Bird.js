@@ -6,6 +6,7 @@ function Bird(brain) {
   this.x = 25;
   this.gravity = 0.9;
   this.velocity = 0;
+  this.col = color(random(100,255),0,random(255),50);
   this.lift = -25;
 
   //this is to copy the bird's brain to another bird object, when creating a new generation.
@@ -21,8 +22,8 @@ function Bird(brain) {
 
   //This draws the bird.
   this.show=function() { 
-    stroke(255);
-    fill(255, 50);
+    
+    fill(this.col);
     ellipse(this.x, this.y, 16, 16);
   };
 

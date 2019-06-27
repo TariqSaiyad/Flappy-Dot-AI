@@ -13,6 +13,8 @@ var counter =0;
 var bestScore=  0;
 var numGenerations=0;
 
+let backgroundImg;
+
 function setup() {
   createCanvas(400, 600);
   slider = createSlider(1, 100, 1); 
@@ -20,10 +22,14 @@ function setup() {
   for (var i=0; i<TOTAL; i++) {
     birds[i] = new Bird();
   }
+
+  backgroundImg = loadImage('assets/background.png');
 }
 
 
 function draw() {
+
+
 
   //slider value used to speed up the simulation.
   for (n=0; n<slider.value(); n++) {
@@ -75,6 +81,9 @@ function draw() {
 
   // DRAWING HERE
   background(0);
+  
+  image(backgroundImg, 0, 0, width, height);
+ 
   for (var birdie of birds) {
     birdie.show();
 
@@ -89,6 +98,7 @@ function draw() {
 
 
   textSize(17);
+  fill(255);
   text('Generation: '+this.numGenerations, 5, 565);
   text('Max: '+this.bestScore, 5, 590);
 }
