@@ -10,9 +10,12 @@ var pipes = [];
 var slider;
 var counter =0;
 
+var bestScore=  0;
+var numGenerations=0;
+
 function setup() {
   createCanvas(400, 600);
-  slider = createSlider(1, 100, 1);
+  slider = createSlider(1, 100, 1); 
   //create multiple birds.
   for (var i=0; i<TOTAL; i++) {
     birds[i] = new Bird();
@@ -65,6 +68,7 @@ function draw() {
     //make new generation of birds if all of them hit the pipes.
     if (birds.length==0) {
       nextGeneration();
+      this.numGenerations++;
       pipes.splice(0, 1);
     }
   }
@@ -73,10 +77,20 @@ function draw() {
   background(0);
   for (var birdie of birds) {
     birdie.show();
+
+    if (birdie.score>this.bestScore) {
+      this.bestScore=birdie.score;
+    }
   }
+
   for (var pipe of pipes) {
     pipe.show();
   }
+
+
+  textSize(17);
+  text('Generation: '+this.numGenerations, 5, 565);
+  text('Max: '+this.bestScore, 5, 590);
 }
 
 
