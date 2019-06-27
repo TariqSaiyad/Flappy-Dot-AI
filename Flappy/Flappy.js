@@ -1,3 +1,6 @@
+// This is inspired by the Coding Train youtube channel.
+// The neuro evolution library is also provided by the channel host.
+
 const TOTAL = 500;
 var birds = [];
 
@@ -6,9 +9,10 @@ var pipes = [];
 
 var slider;
 var counter =0;
+
 function setup() {
   createCanvas(400, 600);
-  slider = createSlider(1,100,1);
+  slider = createSlider(1, 100, 1);
   //create multiple birds.
   for (var i=0; i<TOTAL; i++) {
     birds[i] = new Bird();
@@ -18,21 +22,22 @@ function setup() {
 
 function draw() {
 
+  //slider value used to speed up the simulation.
   for (n=0; n<slider.value(); n++) {
-
     //create new pipe.
     if (counter %80==0) {
       this.pipes.push(new Pipe());
     }
     counter++;
 
+    //update all pipes.
     for (var i=pipes.length-1; i>=0; i--) {
       //pipes[i].show();
       pipes[i].update();
-
+      //for all birds, check if it hits the pipe.
       for (var j=birds.length-1; j>=0; j--) {
         // check if bird hits pipe.
-        if (pipes[i].hits(birds[j]) || birds[j].y==height) {
+        if (pipes [i].hits(birds[j])) {
           this.savedBirds.push( birds.splice(j, 1)[0]);
         }
       }
@@ -43,6 +48,12 @@ function draw() {
       }
     } 
 
+    //if bird goes offscreen, remove it.
+    for (var k=birds.length-1; k>=0; k--) {
+      if (birds [k].offScreen()) {
+        this.savedBirds.push( birds.splice(k, 1)[0]);
+      }
+    }
 
     //for all birds, make them think, update and draw.
     for (var bird of birds) {
@@ -51,19 +62,17 @@ function draw() {
       // bird.show();
     }
 
-
     //make new generation of birds if all of them hit the pipes.
     if (birds.length==0) {
       nextGeneration();
+      pipes.splice(0, 1);
     }
   }
 
-
-
   // DRAWING HERE
   background(0);
-  for (bird of birds) {
-    bird.show();
+  for (var birdie of birds) {
+    birdie.show();
   }
   for (var pipe of pipes) {
     pipe.show();
@@ -71,8 +80,8 @@ function draw() {
 }
 
 
-function keyPressed() {
-  if (key==' ') {
-    bird.up();
-  }
-}
+//function keyPressed() {
+//  if (key==' ') {
+//    bird.up();
+//  }
+//}

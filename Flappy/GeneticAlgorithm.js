@@ -1,6 +1,7 @@
 
 //calculate fitness for the previous gen, and use it to find new birds for the next.
 function nextGeneration() {
+  console.log("next");
 
   calculateFitness();
   for (var i=0; i<TOTAL; i++) {
@@ -19,7 +20,6 @@ function pickABird() {
     index++;
   }
   index--;
-
   var newBird = savedBirds[index];
   var child = new Bird(newBird.brain);
   child.mutate();
